@@ -35,16 +35,17 @@ public class P012_TriangularNumbers {
     }
 
     public static void main(String[] args) {
-        final Optional<long[]> first = Stream.iterate(new long[]{1, 1}, n -> {
+        final Optional<Long> first = Stream.iterate(new long[]{1, 1}, n -> {
             long currSum = LongStream.rangeClosed(1, n[0] + 1).sum();
             long currCount = n[0] += 1;
             return new long[]{currCount, currSum};
         })
-                .filter(ns -> factorsOf(ns[1]).size() > 500)
+                .map(ns -> ns[1])
+                .filter(n -> factorsOf(n).size() > 500)
                 .findFirst();
 
         if (first.isPresent()) {
-            System.out.println("triangular number with over 500 divisors is " + first.get()[1]);
+            System.out.println("triangular number with over 500 divisors is " + first.get());
         } else {
             System.out.println("no triangular number found");
         }
