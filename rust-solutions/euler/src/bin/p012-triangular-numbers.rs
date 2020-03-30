@@ -52,13 +52,17 @@ fn get_factors(n: u64) -> Vec<u64> {
 fn main() {
     let mut triangulars = Triangular::new();
     // find the first triangular number that has over five hundred divisors
-    //let mut res = 0u64;
-    let res = loop {
-        if let Some(n) = triangulars.next() {
-            if get_factors(n).len() > 500 {
-                break n;
-            }
-        }
-    };
-    println!("res = {}", res);
+    let res = triangulars.find(|&n| get_factors(n).len() > 500);
+    if let Some(num) = res {
+        println!("res = {}", num);
+    }
+
+    // let res = loop {
+    //     if let Some(n) = triangulars.next() {
+    //         if get_factors(n).len() > 500 {
+    //             break n;
+    //         }
+    //     }
+    // };
+    // println!("res = {}", res);
 }

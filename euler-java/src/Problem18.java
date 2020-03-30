@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  * User: Cliff
  */
 public class Problem18 {
-    static final String inputFile = "src/euler/java/p18-input.txt";
+    static final String inputFile = "./euler-java/src/p18-input.txt";
 
     //builds a triangular array from the triangle data stored in a file
     private Triangle build( String inputPath ) {
