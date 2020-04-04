@@ -13,7 +13,7 @@
 /// in general it seems the number of subsets = 2^n  where n is the number of elements in the set
 
 
-// iterative powerset using a bitshift index
+/// iterative powerset using a bitshift index
 // fn powerset<T>(s: &[T]) -> Vec<Vec<T>> where T: Clone {
 //     (0..2usize.pow(s.len() as u32)).map(|i| {
 //         s.iter().enumerate().filter(|&(t, _)| (i >> t) % 2 == 1)
@@ -38,12 +38,12 @@ fn main() {
 
 fn power_set(set: &Vec<i32>) {
     fn recurse( set: &Vec<i32>, pos: usize, mut prefix: Vec<i32>) {
+        //println!("pos:{} prefix:{:?}", &pos, &prefix);
         prefix.push(set[pos]);
         println!("{:?}",&prefix);
         for i in pos+1..set.len() {
             let newprefix = prefix.clone();
             recurse(set,i, newprefix);
-            println!("---------");
         }
     }
 
