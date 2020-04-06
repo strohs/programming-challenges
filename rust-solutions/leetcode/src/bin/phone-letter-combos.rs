@@ -24,27 +24,27 @@ use std::collections::HashMap;
 /// combinations - you don't care about the order of the elements
 ///    combination formula, you have n objects and want to choose k    = n! / k!(n - k!)
 
-fn build_digit_map() -> HashMap<char, Vec<&'static str>> {
+fn build_digit_map() -> HashMap<char, Vec<char>> {
     let mut m = HashMap::with_capacity(8);
-    m.insert('2', vec!["a","b","c"]);
-    m.insert('3', vec!["d","e","f"]);
-    m.insert('4', vec!["g","h","i"]);
-    m.insert('5', vec!["j","k","l"]);
-    m.insert('6', vec!["m","n","o"]);
-    m.insert('7', vec!["p","q","r","s"]);
-    m.insert('8', vec!["t","u","v"]);
-    m.insert('9', vec!["w","x","y","z"]);
+    m.insert('2', vec!['a','b','c']);
+    m.insert('3', vec!['d','e','f']);
+    m.insert('4', vec!['g','h','i']);
+    m.insert('5', vec!['j','k','l']);
+    m.insert('6', vec!['m','n','o']);
+    m.insert('7', vec!['p','q','r','s']);
+    m.insert('8', vec!['t','u','v']);
+    m.insert('9', vec!['w','x','y','z']);
     m
 }
 
-/// combine each string in s1 with each string in s2
-fn combine_sets(s1: &Vec<String>, s2: &Vec<String>) -> Vec<String> {
+/// combine each string in s1 with each char in s2
+fn combine_sets(s1: &Vec<String>, s2: &Vec<char>) -> Vec<String> {
     let mut combis = vec![];
     for s1 in s1.iter() {
         for s2 in s2.iter() {
             let mut s = String::new();
             s.push_str(&s1.clone());
-            s.push_str(&s2.clone());
+            s.push(*s2);
             combis.push(s);
         }
     }
@@ -53,13 +53,16 @@ fn combine_sets(s1: &Vec<String>, s2: &Vec<String>) -> Vec<String> {
 
 fn main() {
     let digit_map = build_digit_map();
-    let input1 = "8888";
+    let input1 = "23";
     let digits = input1.chars().collect::<Vec<char>>();
 
-    let mut curr = digit_map.get(&digits[0]).unwrap().iter().map(|&s| String::from(s)).collect::<Vec<String>>();
-    for curr_digit in digits.iter().skip(1) {
-        let next = digit_map.get(curr_digit).unwrap().iter().map(|&s| String::from(s)).collect::<Vec<String>>();
-        curr = combine_sets(&curr, &next);
-    }
-    println!("{:#?}",&curr);
+    let init: Vec<String> = digit_map.get(&digits[0]).unwrap().iter().map(|&s| s.to_string()).collect();
+    let combis = digits.iter()
+        .skip(1)
+        .fold(init, |acc, digit| {
+            let digit_chars = digit_map.get(digit).unwrap();
+            combine_sets(&acc, digit_chars)
+    });
+
+    println!("{:#?}",&combis);
 }
