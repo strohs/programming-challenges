@@ -44,8 +44,9 @@ public class MergeSortGeneric {
     }
 
     public static void main(String[] args) {
-        List<Integer> ls1 = Arrays.asList(9,1,3,8,7,2,7,3,6,2,5,2,4,0,5);
         MergeSortGeneric ms = new MergeSortGeneric();
+        
+        List<Integer> ls1 = new ArrayList<>( Arrays.asList(9,1,3,8,7,2,7,3,6,2,5,2,4,0,5) );
         List<Integer> sorted = ms.sort(ls1);
         System.out.println(sorted);
 

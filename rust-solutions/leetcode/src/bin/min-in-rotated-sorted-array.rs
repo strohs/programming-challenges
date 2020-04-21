@@ -3,9 +3,7 @@
 // ex 1:   [4,5,6,7,0,1,2] -> 0
 
 fn find_min(nums: &[i32]) -> i32 {
-    fn mid_index(si: usize, ei: usize) -> usize {
-        ((ei - si) / 2) + si
-    }
+    let mid_index = |si: usize, ei: usize| ((ei - si) / 2) + si;
 
     // current start index
     let mut si: usize = 0;

@@ -17,7 +17,9 @@
 /// Given word = "ABCB", return false.
 /// ```
 
-// get up to four 'cells' adjacent to r,c
+/// get (up to) four 'cells' adjacent to the cell at index: r,c
+/// # returns
+/// a 3-tuple containing the adjacent cells' row/col indices and the character at that index
 fn adj(board: &Vec<Vec<char>>, r: usize, c: usize) -> Vec<(usize, usize, char)> {
     // safely get a value from a 2d Vec
     let get2d = |ri: usize, ci: usize| {
@@ -44,8 +46,8 @@ fn adj(board: &Vec<Vec<char>>, r: usize, c: usize) -> Vec<(usize, usize, char)> 
 }
 
 
-
-fn find_all(board: &Vec<Vec<char>>, ch: char) -> Vec<(usize, usize)> {
+/// find and return all index pairs of *ch* on the *board*
+fn find_all_indices(board: &Vec<Vec<char>>, ch: char) -> Vec<(usize, usize)> {
     let cdim = board[0].len();
     board.iter()
         .flatten()
@@ -55,7 +57,8 @@ fn find_all(board: &Vec<Vec<char>>, ch: char) -> Vec<(usize, usize)> {
         .collect::<Vec<(usize, usize)>>()
 }
 
-// depth first search, starting at row,col   try to find a path that matches ALL chars in letters
+/// depth first search
+/// starting at row,col, try to find a path on *board* that matches **ALL** chars in *word*
 fn dfs(board: &Vec<Vec<char>>, row: usize, col: usize, word: &Vec<char>) -> bool {
     let mut to_visit: Vec<(usize, usize)> = vec![];
     let mut visited: Vec<(usize, usize)> = vec![];
@@ -86,12 +89,15 @@ fn dfs(board: &Vec<Vec<char>>, row: usize, col: usize, word: &Vec<char>) -> bool
     return i == word.len()
 }
 
-fn exist(board: &Vec<Vec<char>>, word: String) -> bool {
+fn exists(board: &Vec<Vec<char>>, word: String) -> bool {
 
     let letters = word.chars().collect::<Vec<char>>();
-    let start_pos = find_all(&board, letters[0]);
+    // get all row/col indices that match the first letter of the word
+    let start_pos = find_all_indices(&board, letters[0]);
 
-    start_pos.into_iter().any(|(row, col)| dfs(&board, row, col, &letters))
+    start_pos
+        .into_iter()
+        .any(|(row, col)| dfs(&board, row, col, &letters))
 }
 
 fn main() {
@@ -101,9 +107,9 @@ fn main() {
         vec!['A','D','E','E']
     ];
 
-    dbg!( exist(&b1, "E".to_string()) );
-    dbg!( exist(&b1, "ABCCED".to_string()) ); // true
-    dbg!( exist(&b1, "SEE".to_string()) ); // true
-    dbg!( exist(&b1, "ABCB".to_string()) ); // false
+    dbg!( exists(&b1, "E".to_string()) );
+    dbg!( exists(&b1, "ABCCED".to_string()) ); // true
+    dbg!( exists(&b1, "SEE".to_string()) ); // true
+    dbg!( exists(&b1, "ABCB".to_string()) ); // false
 
 }
