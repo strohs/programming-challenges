@@ -29,7 +29,7 @@ fn combine<T>(l: &[T], r: &[T]) -> Vec<T>
 }
 
 /// sort arr using merge sort
-fn sort<T>(arr: &[T]) -> Vec<T>
+fn merge_sort<T>(arr: &[T]) -> Vec<T>
     where T: PartialOrd + Copy {
 
     if arr.len() <= 1 {
@@ -38,8 +38,8 @@ fn sort<T>(arr: &[T]) -> Vec<T>
     // compute the midpoint
     let mp = arr.len() / 2;
     // recursively sort left and right slices
-    let vl = sort(&arr[..mp] );
-    let vr = sort(&arr[mp..] );
+    let vl = merge_sort(&arr[..mp] );
+    let vr = merge_sort(&arr[mp..] );
 
     // finally combine the left and right halves
     combine(&vl, &vr)
@@ -47,5 +47,5 @@ fn sort<T>(arr: &[T]) -> Vec<T>
 
 fn main() {
     let arr = [9,7,5,3,0,1,2,4,6,8];
-    dbg!( sort(&arr.to_vec()) );
+    dbg!( merge_sort(&arr.to_vec()) );
 }
