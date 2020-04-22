@@ -33,20 +33,20 @@ fn two_sum(v: &[i32], sum: i32) -> Vec<Vec<i32>> {
     res
 }
 
-/// return all triplets of integers that add up to 'sum'. The returned triplicates must not
+/// return all triplets of integers that add up to 'sum'. The returned triples must not
 /// be repeated
-fn three_sum(v: &[i32], sum: i32) -> HashSet<Vec<i32>> {
-    let mut trips = HashSet::new();
+fn three_sum(v: &[i32], sum: i32) -> Vec<Vec<i32>> {
+    let mut triples = HashSet::new();
     for idx in 0..v.len() {
         let target = sum - v[idx];
         let res = two_sum(&v[idx+1..], target);
         for mut res_vec in res {
             res_vec.push(v[idx]);
             res_vec.sort_unstable();
-            trips.insert(res_vec);
+            triples.insert(res_vec);
         }
     }
-    trips
+    triples.into_iter().collect()
 }
 
 fn main() {
