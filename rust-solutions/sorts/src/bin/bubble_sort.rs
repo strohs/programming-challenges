@@ -27,9 +27,7 @@ pub fn gen_rand_vec(size: usize, min: i32, max: i32)  -> Vec<i32> {
     rs
 }
 
-fn main() {
-
-}
+fn main() {}
 
 #[cfg(test)]
 mod tests {

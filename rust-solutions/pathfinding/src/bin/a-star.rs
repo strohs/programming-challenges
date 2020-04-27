@@ -101,10 +101,10 @@ impl Grid {
     fn new5x5() -> Grid {
         let grid = vec![
             vec![Node::new(0,0,NodeType::Start, 1,0,0), Node::empty(0,1), Node::empty(0,2), Node::obs(0,3), Node::empty(0,4)],
-            vec![Node::empty(1,0), Node::empty(1,1), Node::empty(1,2), Node::obs(1,3), Node::empty(1,4)],
+            vec![Node::empty(1,0), Node::empty(1,1), Node::empty(1,2), Node::empty(1,3), Node::empty(1,4)],
             vec![Node::empty(2,0), Node::obs(2,1), Node::obs(2,2), Node::obs(2,3), Node::empty(2,4)],
             vec![Node::empty(3,0), Node::obs(3,1), Node::obs(3,2), Node::obs(3,3), Node::empty(3,4)],
-            vec![Node::empty(4,0), Node::empty(4,1), Node::empty(4,2), Node::empty(4,3), Node::new(4,4, NodeType::Goal, 1,1000,1000)],
+            vec![Node::obs(4,0), Node::empty(4,1), Node::empty(4,2), Node::empty(4,3), Node::new(4,4, NodeType::Goal, 1,1000,1000)],
         ];
         Grid {
             grid,
@@ -178,9 +178,9 @@ impl Grid {
     }
 
     /// find the lowest cost path from start_node to goal_node using A* pathfinding
-    /// returns Some(Node) if a path was found, where Node.came_from will contain links
+    /// returns `Some(Node)` if a path was found, where `Node.came_from` will contain links
     /// to previous Node(s) in the lowest cost path.
-    /// If no path to goal was found, None is returned
+    /// If no path to goal was found, `None` is returned
     fn a_star(&mut self) -> Option<Node> {
         // nodes's to be evaluated, sorted by a Node's lowest f-score
         let mut open_set = Vec::new();
