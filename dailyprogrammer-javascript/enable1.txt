@@ -37786,7 +37786,7 @@ defibrination
 defibrinations
 deficiencies
 deficiency
-deficient
+Deficient
 deficiently
 deficients
 deficit
