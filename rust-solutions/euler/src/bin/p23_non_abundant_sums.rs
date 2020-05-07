@@ -1,4 +1,4 @@
-use std::collections::BTreeSet;
+use std::collections::{HashSet};
 
 /// # Problem 23 Non-Abundant Sums
 /// A perfect number is a number for which the sum of its proper divisors is exactly equal to
@@ -53,14 +53,14 @@ fn divisor_type(n: u64) -> Divisors {
 }
 
 /// compute all the abundant integers between 1 and MAX_ABUNDANT
-fn abundant_numbers() -> BTreeSet<u64> {
+fn abundant_numbers() -> HashSet<u64> {
     (1..=MAX_ABUNDANT)
         .filter(|&n| divisor_type(n) == Divisors::Abundant)
         .collect()
 }
 
 fn main() {
-    let abundants: BTreeSet<u64> = abundant_numbers();
+    let abundants: HashSet<u64> = abundant_numbers();
     let mut total_sum = 0;
 
     for n in 1..=MAX_ABUNDANT {
@@ -75,7 +75,7 @@ fn main() {
         }
         if !found_sum {
             total_sum += n;
-            println!("{} has no abundant sum", n);
+            //println!("{} has no abundant sum", n);
         }
     }
 
