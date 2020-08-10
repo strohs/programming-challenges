@@ -11,21 +11,32 @@
 
 
 fn main() {
-    let mut a = [0, 1, 2];
+    let mut a = [0, 1, 2,3,4,5,6,7,8,9];
 
-    let res = lex_perm(6, &mut a);
+    let res = lex_perm(1_000_000, &mut a);
     println!("result is {}", res); //2783915460
 }
 
-// find the index of the smallest element in `a` that is to the right of > first
+// find the index of the smallest element in `a` that is to the right of first and is also > first
 fn smallest_pos(a: &[u8], first: u8, b: usize) -> usize {
-    let mut ci = b;
-    for i in b+1..a.len() {
-        if a[i] > first && a[i] < a[ci] {
-            ci = i;
-        }
-    }
-    ci
+
+    let smallest = a[b+1..].iter()
+        .enumerate()
+        .scan(b,|ci, (idx, e)| {
+            if *e > first && *e < a[*ci] {
+                *ci = idx + b + 1;
+            }
+            Some(*ci)
+        });
+
+    smallest.last().unwrap_or(b)
+    // let mut ci = b;
+    // for i in b+1..a.len() {
+    //     if a[i] > first && a[i] < a[ci] {
+    //         ci = i;
+    //     }
+    // }
+    // ci
 }
 
 fn lex_perm(nth: usize, a: &mut[u8]) -> String {
@@ -40,7 +51,7 @@ fn lex_perm(nth: usize, a: &mut[u8]) -> String {
 
             // find ceiling of first char to right of first char
             let ceil_idx = smallest_pos(&a,a[i], i+1);
-
+            
             // swap first and second chars
             a.swap(i, ceil_idx);
 
