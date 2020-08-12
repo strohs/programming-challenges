@@ -22,8 +22,8 @@ use num::BigUint;
 
 #[derive(Debug)]
 struct Fib {
-    c: BigUint,     // current fib digit
-    n: BigUint,     // next fib digit
+    c: BigUint,     // current fib number
+    n: BigUint,     // next fib number
 }
 
 impl Fib {
