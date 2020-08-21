@@ -3,6 +3,9 @@
 [[package]]
 name = "algorithms"
 version = "0.1.0"
+dependencies = [
+ "num-bigint",
+]
 
 [[package]]
 name = "autocfg"
