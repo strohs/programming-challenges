@@ -9,13 +9,12 @@
 
 package algorithms.easy;
 
-import java.util.stream.IntStream;
 
 public class AppendAndDelete {
 
 
     // returns number of chars that matched in each string, returns the count once first non-matching char is found
-    static long matchingCharCount(String s, String t) {
+    static int matchingCharCount(String s, String t) {
         int minLength = Math.min(s.length(), t.length());
         for (int i = 0; i < minLength; i++) {
             if (s.charAt(i) != t.charAt(i)) {
@@ -25,47 +24,30 @@ public class AppendAndDelete {
         return minLength;
     }
 
+    static boolean isEven(int n) {
+        return n % 2 == 0;
+    }
+
     static String appendAndDelete(String s, String t, int k) {
-        long count = matchingCharCount(s, t);
-        long sb = s.length() - count;
-        long tb = t.length() - count;
 
         if (s.length() + t.length() <= k) {
             // in this case, k is large enough so that we could delete all of s and then add all of t's chars to it
             return "Yes";
         } else {
-            //k < s + t, need to see if there are chars in common
+            // need to first get a count of any matching prefix characters
+            int count = matchingCharCount(s, t);
 
-            if (count == 0) {
-                // no chars in common and k is too small to delete all of s and then add all of t
-                return "No";
+            if ( isEven( k - (s.length() - count + t.length() - count)) ) {
+                return "Yes";
             } else {
-                // there are some chars in common
-
-                // if s.len < t.len then tb must == k to be successful
-                if (s.length() < t.length()) {
-                    if (tb == k) return "Yes"; else return "No";
-                }
-
-                // if s.len > t.len
-                if (s.length() > t.length()) {
-
-                }
-
-                if (sb + tb == k) {
-                    return "Yes";
-                } else {
-                    return "No";
-                }
+                return "No";
             }
         }
     }
 
     public static void main(String[] args) {
-        String s = "hackerhappy";
-        String t = "hackerrank";
-        int k = 9;
-        System.out.println(appendAndDelete(s, t, k));
+        
+        System.out.println(appendAndDelete("hackerhappy", "hackerrank", 9)); // yes
 
         System.out.println(appendAndDelete("aba", "aba", 6)); // yes
 
@@ -73,15 +55,13 @@ public class AppendAndDelete {
 
         System.out.println(appendAndDelete("ash", "ashley", 3)); // yes
 
-//        System.out.println(appendAndDelete("tzhbhgd", "aba", 14)); // yes
-//
-//        System.out.println(appendAndDelete("xyz", "abcdefg", 7)); //mo
-//
+        System.out.println(appendAndDelete("xyz", "abcdefg", 7)); // no
+
         System.out.println(appendAndDelete("aaaaaaaaaa", "aaaaa", 7)); // yes
 
-        System.out.println(appendAndDelete("aaaaabaaaaa", "aaaaa", 6)); // yes
-//
-//        System.out.println(appendAndDelete("aaa", "aaaaa", 2)); // yes
+        System.out.println(appendAndDelete("aaaaaaaaaa", "aaaaa", 6)); // no
+
+        System.out.println(appendAndDelete("aaa", "aaaaa", 2)); // yes
 
     }
 }
