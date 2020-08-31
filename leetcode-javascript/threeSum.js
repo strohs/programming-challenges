@@ -33,12 +33,12 @@ function threeSum(nums, sum) {
   for (let idx=0; idx < nums.length; idx++) {
     const target = sum - nums[idx];
     const sums = twoSum(nums.slice(idx+1), target);
-    for (let ts of sums) {
-      ts.push(nums[idx]);
-      ts.sort();
+    for (let pairs of sums) {
+      pairs.push(nums[idx]);
+      pairs.sort();
       // only add distinct triplets to the final triplets array
-      if (!triplets.some(arr => equalArrays(arr, ts))) {
-        triplets.push(ts);
+      if (!triplets.some(arr => equalArrays(arr, pairs))) {
+        triplets.push(pairs);
       }
     }
   }
