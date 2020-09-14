@@ -41,6 +41,7 @@ fn remove_nth_from_end(list: &mut Link, n: usize) {
         return;
     }
 
+    // compute list length O(n)
     let get_length = |l: &Link| {
         let mut length = 0;
         let mut current = l;
