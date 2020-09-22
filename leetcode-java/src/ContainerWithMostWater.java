@@ -16,10 +16,11 @@ import java.util.function.BiFunction;
 
 public class ContainerWithMostWater {
 
-    static private int xLen(int cur_pos, int start_pos) {
+    static private int xLength(int cur_pos, int start_pos) {
         return cur_pos - start_pos;
     }
 
+    // this method does the same thing as xLength
     static BiFunction<Integer, Integer, Integer> xDistance = (c, s) -> c - s;
 
     static int maxArea(int [] arr) {
@@ -30,9 +31,9 @@ public class ContainerWithMostWater {
                 int curArea = 0;
                 if (arr[i] < arr[j]) {
                     //curArea = xDistance.apply(j, i);
-                    curArea = arr[i] * xLen(j, i);
+                    curArea = arr[i] * xLength(j, i);
                 } else {
-                    curArea = arr[j] * xLen(j, i);
+                    curArea = arr[j] * xLength(j, i);
                 }
 
                 if (curArea > maxArea) {
