@@ -48,6 +48,9 @@ public class ContainerWithMostWater {
 
     public static void main(String[] args) {
         int [] arr = {1, 8, 6, 2, 5, 4, 8, 3, 7};
-        System.out.println(maxArea(arr));
+        System.out.println(maxArea(arr));   //49
+
+        int [] arr2 = {1, 2, 2, 1};
+        System.out.println(maxArea(arr2));  //3
     }
 }
