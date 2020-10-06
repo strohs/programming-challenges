@@ -32,7 +32,7 @@ pub fn generate_parentheses(n: i32) -> Vec<String> {
 /// op - a count of the current opening parentheses in cur_str
 /// cp - a count of the current closing parentheses in cur_str
 /// max_pairs - is the maximum number of parentheses pairs to generate
-fn backtrack(ps: &mut Vec<String>, cur_str: String, op:i32 , cp: i32, max_pairs: i32) {
+fn backtrack(ps: &mut Vec<String>, cur_str: String, op: i32, cp: i32, max_pairs: i32) {
     if cur_str.len() == (max_pairs * 2) as usize {    // base case
         ps.push(cur_str.clone());
         return;
