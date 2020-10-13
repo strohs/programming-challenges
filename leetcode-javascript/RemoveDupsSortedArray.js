@@ -34,18 +34,15 @@ function remove_duplicates(nums) {
       peekIdx++;
     }
 
-    if (peekIdx - startIdx > 1) {
-      startIdx = peekIdx;
-    } else {
-      startIdx++;
-    }
+    startIdx = (peekIdx - startIdx > 1) ? peekIdx : startIdx + 1;
+
     nums[numsIdx] = nums[peekIdx - 1];
     numsIdx++;
   }
   return numsIdx;
 }
 
-let nums = [1,1,2];
+let nums = [0,0,1,1,2,2,3,3,3,4];
 
 let l = remove_duplicates(nums);
 console.log(l, nums);
