@@ -24,34 +24,20 @@
 /// so that the non repeating elements appear at the beginning of the array, making sure to keep
 /// their sorted order
 pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
-    let mut nums_idx: usize = 0;            // the current index in nums
-    let mut start_idx: usize = nums_idx;    // start index
+    let mut count: usize = 1;
 
-    while nums_idx < nums.len() && start_idx < nums.len() {
-        // peek index will 'peek ahead' until no duplicate elements are found
-        let mut peek_idx = start_idx;
-        while peek_idx < nums.len() && nums[peek_idx] == nums[start_idx] {
-            peek_idx += 1;
+    for i in 1..nums.len() {
+        if nums[i] != nums[i-1] {
+            nums[count] = nums[i];
+            count += 1;
         }
-        
-        if peek_idx - start_idx > 1 {
-            // there were duplicates,
-            start_idx = peek_idx;
-        } else {
-            // no duplicates
-            start_idx += 1;
-        }
-        nums[nums_idx] = nums[peek_idx - 1];
-        nums_idx += 1;
     }
 
-    nums_idx as i32
+    count as i32
 }
 
 
-fn main() {
-
-}
+fn main() {}
 
 #[cfg(test)]
 mod tests {
