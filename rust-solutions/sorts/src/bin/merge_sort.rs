@@ -25,6 +25,7 @@ fn combine<T>(l: &[T], r: &[T]) -> Vec<T>
         combs.push(r[j]);
         j += 1;
     }
+
     combs
 }
 
@@ -38,14 +39,19 @@ fn merge_sort<T>(arr: &[T]) -> Vec<T>
     // compute the midpoint
     let mp = arr.len() / 2;
     // recursively sort left and right slices
-    let vl = merge_sort(&arr[..mp] );
-    let vr = merge_sort(&arr[mp..] );
+    let vl = merge_sort(&arr[..mp]);
+    let vr = merge_sort(&arr[mp..]);
 
     // finally combine the left and right halves
     combine(&vl, &vr)
 }
 
 fn main() {
-    let arr = [9,7,5,3,0,1,2,4,6,8];
-    dbg!( merge_sort(&arr.to_vec()) );
+    let mut arr = [9,7,5,2,0,8,6,4,3,1];
+
+    let (a1, a2) = arr.split_at_mut(5);
+    dbg!(&a1);
+    dbg!(&a2);
+
+    //dbg!( merge_sort(&arr.to_vec()) );
 }
