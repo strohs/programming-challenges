@@ -122,6 +122,9 @@ dependencies = [
 [[package]]
 name = "google"
 version = "0.1.0"
+dependencies = [
+ "lazy_static",
+]
 
 [[package]]
 name = "hermit-abi"
