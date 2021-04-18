@@ -26,17 +26,15 @@ function ListNode(val, next) {
 function buildList(arr) {
     let head = new ListNode();
     let cur_node = head;
-    for (n of arr) {
+    for (const n of arr) {
         let node = new ListNode(n);
         cur_node.next = node;
         cur_node = node;
     }
-    return head;
+    return head.next;
 }
 
-function hasNext(node) {
-    return !!(node && node.next);
-}
+
 
 // prints the value of each node to the console.log
 function printList(head) {
@@ -45,6 +43,10 @@ function printList(head) {
         console.log(cur_node.val);
         cur_node = cur_node.next;
     }
+}
+
+function hasNext(node) {
+    return (node !== null && node.next !== null);
 }
 
 /**
@@ -57,13 +59,12 @@ const swapPairs = function(head) {
     while (cur_node !== null) {
         // get next two nodes
         let n1 = hasNext(cur_node) ? cur_node.next : null;
-        let n2 = hasNext(n1) ? n1.next : null;
 
-        // swap the nodes
-        if (n1 && n2) {
-            n1.next = n2.next;
-            n2.next = n1;
-            cur_node.next = n2;
+        // swap node values
+        if (n1) {
+            const t = cur_node.val;
+            cur_node.val = n1.val;
+            n1.val = t;
         }
         // advance cur_node by two nodes
         cur_node = cur_node.next;
@@ -77,6 +78,6 @@ const swapPairs = function(head) {
 // const swapped = swapPairs(head);
 // printList(swapped);
 
-const head = buildList([1,2,3,4,5,6]);
+const head = buildList([]);
 const swapped = swapPairs(head);
 printList(swapped);

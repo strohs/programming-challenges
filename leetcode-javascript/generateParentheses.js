@@ -27,7 +27,7 @@ function generateParentheses(n) {
 
 /// helper function that recursively generates parentheses combinations. It will ensure that
 /// opening parens always precede closing parens
-/// ps - is a vector holding the final parentheses strings
+/// ps - is a array holding the final parentheses strings
 /// curStr - is the current parentheses string being built
 /// op - a count of the current opening parentheses in cur_str
 /// cp - a count of the current closing parentheses in cur_str
