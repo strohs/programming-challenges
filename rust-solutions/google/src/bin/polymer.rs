@@ -25,7 +25,7 @@ fn should_replace(slice: &str) -> bool {
 }
 
 fn main() {
-    let path = Path::new("./google/src/bin/input.txt");
+    let path = Path::new("./input.txt");
     let mut s = read_input(path).unwrap();
 
     let mut i = 0_usize;

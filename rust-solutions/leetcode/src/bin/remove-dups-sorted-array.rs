@@ -24,6 +24,10 @@
 /// so that the non repeating elements appear at the beginning of the array, making sure to keep
 /// their sorted order
 pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
+    if nums.is_empty() {
+        return 0_i32;
+    }
+
     let mut count: usize = 1;
 
     for i in 1..nums.len() {
@@ -32,7 +36,6 @@ pub fn remove_duplicates(nums: &mut Vec<i32>) -> i32 {
             count += 1;
         }
     }
-
     count as i32
 }
 
@@ -54,7 +57,7 @@ mod tests {
 
     #[test]
     fn example_2() {
-        let mut nums = vec![0,0,1,1,1,2,2,3,3,4];
+        let mut nums = vec![0,0,1,1,1,2,2,3,3,4,4];
         let length = remove_duplicates(&mut nums);
         assert_eq!(length, 5);
         assert_eq!(nums[0], 0);
@@ -62,6 +65,16 @@ mod tests {
         assert_eq!(nums[2], 2);
         assert_eq!(nums[3], 3);
         assert_eq!(nums[4], 4);
+    }
+
+    #[test]
+    fn example_3() {
+        let mut nums = vec![1,1,2,2,3,3];
+        let length = remove_duplicates(&mut nums);
+        assert_eq!(length, 3);
+        assert_eq!(nums[0], 1);
+        assert_eq!(nums[1], 2);
+        assert_eq!(nums[2], 3);
     }
 
     #[test]

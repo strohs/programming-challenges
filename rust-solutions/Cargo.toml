@@ -8,5 +8,6 @@ members = [
     "google",
     "shuffle",
     "pathfinding",
-    "euler"
+    "euler",
+    "misc",
 ]
