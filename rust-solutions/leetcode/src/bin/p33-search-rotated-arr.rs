@@ -9,17 +9,6 @@
 /// Given the array `nums` after the rotation and an integer target, return the index of `target`
 /// if it is in `nums`, or `-1` if it is not in `nums`.
 
-
-// do while nums slice is not empty
-// check if nums first < nums last, if so, nums is sorted and binary search nums for target
-// else
-//   get midpoint, M, of nums
-//   determine which half of nums is sorted
-//   if target in range of sorted half, bin-search it and return
-//   else target in un-sorted half
-//     move mid point +/- one
-//     and restart search in the new sublice
-
 pub fn search(nums: Vec<i32>, target: i32) -> i32 {
     fn is_sorted(slice: &[i32], start: usize, end: usize) -> bool {
         slice[start] <= slice[end]
@@ -29,23 +18,28 @@ pub fn search(nums: Vec<i32>, target: i32) -> i32 {
         target >= slice[start] && target <= slice[end]
     }
 
-    // the first index of a the
+    // these initially point to the first and last elements of nums
     let mut start_idx = 0;
     let mut end_idx = nums.len() - 1;
 
+    // we'll repeatedly reduce the slice that start/end index point to, by half,
+    // as we figure out where target resides
     while !nums[start_idx..=end_idx].is_empty() {
 
+        // if the "slice" we are looking at is sorted, then the target must be within that slice,
+        // we can simply perform a binary search to find it
         if is_sorted(&nums, start_idx, end_idx) {
-            // binary-search for target in slice and return result
             return match nums[start_idx..=end_idx].binary_search(&target) {
                 Ok(idx) => (start_idx + idx) as i32,
                 _ => -1
             }
         } else {
-            // middle index
+            // the slice we are looking at is not sorted, so compute the middle index of the slice
+            // and determine if target is within the sorted slice, or within the un-sorted slice
+
             let mi = (end_idx + start_idx) / 2;
 
-            // check left side
+            // check if left slice is sorted and if target is within that sorted slice
             if is_sorted(&nums, start_idx, mi) {
                 if is_within(&nums, start_idx, mi, target) {
                     end_idx = mi;
@@ -53,7 +47,7 @@ pub fn search(nums: Vec<i32>, target: i32) -> i32 {
                     start_idx = mi + 1;
                 }
             } else {
-                // else right side must be sorted
+                // else right side must be sorted, check if target is within right side slice
                 if is_within(&nums, mi+1, end_idx, target) {
                     start_idx = mi + 1;
                 } else {
